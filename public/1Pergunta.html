@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Hamburgueria</title>
+    <!-- Inclua os links do Bootstrap via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div id="atualizacao-container">
+            <h1>Atualizar Dados</h1>
+            <form id="atualizacao-form" action="/atualizar_status" method="POST">
+                <div class="mb-3">
+                    <label for="lucro">Lucro:</label>
+                    <input type="text" class="form-control" id="lucro" name="lucro">
+                </div>
+                <div class="mb-3">
+                    <label for="reputacao">Reputação:</label>
+                    <input type="text" class="form-control" id="reputacao" name="reputacao">
+                </div>
+                <div class="mb-3">
+                    <label for="concorrencia">Concorrencia:</label>
+                    <input type="text" class="form-control" id="concorrencia" name="concorrencia">
+                </div>
+                <input type="hidden" name="id" value="1"> <!-- Defina o ID como 1 -->
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <button type="button" onclick="proximaPergunta()"></button> 
+            </form>
+        </div>
+    </div>
+
+    <!-- Inclua os scripts do Bootstrap no final do arquivo -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    
+    $(document).ready(function () {
+        $("#atualizacao-form").submit(function (e) {
+            e.preventDefault();
+
+            // Obtenha os valores do formulário
+            var lucro = $("#lucro").val();
+            var reputacao = $("#reputacao").val();
+            var concorrencia = $("#concorrencia").val();
+            var id = 1; // Obtém o ID do campo oculto
+
+            // Envie os valores para o servidor via AJAX
+            $.ajax({
+                type: "POST",
+                url: "/atualizar_status", // Rota para o servidor Node.js
+                data: { id: id, lucro: lucro, reputacao: reputacao, concorrencia: concorrencia },
+                success: function (response) {
+                    alert(response);
+                },
+                error: function () {
+                    alert("Erro na requisição.");
+                }
+            });
+        });
+    });
+
+    function proximaPergunta() {
+        window.location.href = "Pergunta_2";
+        }
+</script>
+</body>
+</html>

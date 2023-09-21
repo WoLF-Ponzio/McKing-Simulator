@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Hamburgueria</title>
+    <!-- Inclua os links do Bootstrap via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style> 
+        body {
+            background-color: #252f43;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Dados do Banco de Dados</h1>
+        <p>ID: <%= dados.id %></p>
+        <p>Lucro: <%= lucro %></p>
+        <p>Reputação: <%= reputacao %></p>
+        <p>Concorrência: <%= concorrencia %></p>
+    </div>
+
+    <script>
+        let lucro = 0;
+        let reputacao = 0;
+        let concorrencia = 0;
+
+        function opcao1() {
+            // Lógica para a primeira opção
+            lucro += 10;
+            reputacao += 5;
+            concorrencia -= 2;
+            // Vá para a próxima pergunta diretamente
+            proximaPergunta();
+        }
+
+        function opcao2() {
+            // Lógica para a segunda opção
+            lucro += 5;
+            reputacao -= 2;
+            concorrencia += 10;
+            // Vá para a próxima pergunta diretamente
+            proximaPergunta();
+        }
+
+        function opcao3() {
+            // Lógica para a terceira opção
+            lucro -= 5;
+            reputacao += 10;
+            concorrencia += 5;
+            // Vá para a próxima pergunta diretamente
+            proximaPergunta();
+        }
+
+        function proximaPergunta() {
+            window.location.href = '20Fim.html';
+        }
+    </script>
+</body>
+</html>
