@@ -19,9 +19,8 @@
     <div class="container mt-5">
         <div id="pergunta-container">
             <h3>Diferenciação</h3>
-            <p class="mb-3">Sua hamburgueria está localizada em uma área com forte concorrência de outras opções de fast-food.  
+            <p class="mb-3">Sua hamburgueria está localizada em uma área com forte concorrência de outras opções de fast-food.
                 <br> Você está considerando uma estratégia para se destacar e atrair mais clientes. Agora, você precisa decidir como diferenciar sua hamburgueria. </p>
-           
             <div class="btn-group-vertical" role="group" aria-label="Opções">
                 <button type="button" class="btn btn-success mb-2 " style="width: 900px;height:55px;" data-opcao="opcao1">Promoções Diárias Especiais  </button>
                 <br>
@@ -84,17 +83,17 @@ let id = 1;
                 case "opcao1":
                     lucro += 1;
                     reputacao += 0;
-                    concorrencia -= 1;
+                    concorrencia += 1;
                     break;
                 case "opcao2":
-                    lucro -= 1;
-                    reputacao -= 0;
-                    concorrencia -= 1;
+                    lucro -= 0;
+                    reputacao += 1;
+                    concorrencia -= 0;
                     break;
                 case "opcao3":
                     lucro -= 0;
                     reputacao += 1;
-                    concorrencia -= 0;
+                    concorrencia += 1;
                     break;
                 default:
                     break;

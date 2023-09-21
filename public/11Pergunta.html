@@ -80,18 +80,18 @@ let id = 1;
             const opcaoEscolhida = event.target.dataset.opcao;
             switch (opcaoEscolhida) {
                 case "opcao1":
-                    lucro += 1;
-                    reputacao += 0;
+                    lucro -= 1;
+                    reputacao += 1;
                     concorrencia -= 1;
                     break;
                 case "opcao2":
-                    lucro -= 1;
-                    reputacao -= 0;
-                    concorrencia -= 1;
+                    lucro -= 0;
+                    reputacao -= 1;
+                    concorrencia += 1;
                     break;
                 case "opcao3":
                     lucro -= 0;
-                    reputacao += 1;
+                    reputacao += 0;
                     concorrencia -= 0;
                     break;
                 default:

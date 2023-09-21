@@ -20,7 +20,7 @@
         <div id="pergunta-container">
             <h3>Situação Surpresa: Inspeção Sanitária</h3>
             <p class="mb-3"> Você recebe uma visita inesperada de um inspetor sanitário.<br>
-                 Ele informa que encontrou algumas questões menores de higiene em sua cozinha que precisam ser corrigidas imediatamente. </p>
+                Ele informa que encontrou algumas questões menores de higiene em sua cozinha que precisam ser corrigidas imediatamente. </p>
             
             <div class="btn-group-vertical" role="group" aria-label="Opções">
                 <button type="button" class="btn btn-success mb-2 " style="width: 900px;height:55px;" data-opcao="opcao1" >Investir para corrigir as questões de higiene imediatamente.</button>
@@ -79,19 +79,14 @@ let id = 1;
             const opcaoEscolhida = event.target.dataset.opcao;
             switch (opcaoEscolhida) {
                 case "opcao1":
-                    lucro += 1;
-                    reputacao += 0;
-                    concorrencia -= 1;
+                    lucro -= 1;
+                    reputacao += 1;
+                    concorrencia -= 0;
                     break;
                 case "opcao2":
                     lucro -= 1;
-                    reputacao -= 0;
-                    concorrencia -= 1;
-                    break;
-                case "opcao3":
-                    lucro -= 0;
-                    reputacao += 1;
-                    concorrencia -= 0;
+                    reputacao -= 1;
+                    concorrencia += 1;
                     break;
                 default:
                     break;
