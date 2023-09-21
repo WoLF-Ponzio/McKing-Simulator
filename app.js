@@ -33,6 +33,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 //rota página 1
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/0Comeco.html'); // Substitua 'seuarquivo.html' pelo caminho do seu arquivo HTML
+});
 app.get('/Pergunta_1', (req, res) => {
     res.sendFile(__dirname + '/public/1Pergunta.html'); // Substitua 'seuarquivo.html' pelo caminho do seu arquivo HTML
   });
@@ -91,23 +94,45 @@ app.get('/Pergunta_1', (req, res) => {
     res.sendFile(__dirname + '/public/19Pergunta.html'); // Substitua 'seuarquivo.html' pelo caminho do seu arquivo HTML
   });
 
-// Rota para atualizar os dados no banco de dados
-app.post('/atualizar_status', (req, res) => {
-  const { id, lucro, reputacao, concorrencia } = req.body;
-
-  // Atualize os valores no banco de dados
-  const sql = `UPDATE Status SET Lucro = ?, Reputação = ?, Concorrencia = ? WHERE Id = ?`;
-
-  db.query(sql, [lucro, reputacao, concorrencia, id], (err, result) => {
-    if (err) {
-      console.error('Erro na atualização:', err);
-      res.status(500).send('Erro na atualização.');
-      return;
-    }
-    console.log('Atualização bem-sucedida:', result.affectedRows, 'linhas afetadas.');
-    res.send('Atualização bem-sucedida.');
+  //começo
+  app.post('/atualizar_status', (req, res) => {
+    const { id, lucro, reputacao, concorrencia } = req.body;
+    
+    // Atualize os valores no banco de dados
+    const sql = `UPDATE Status SET Lucro = ?, Reputação = ?, Concorrencia = ? WHERE Id = ?`;
+  
+    db.query(sql, [lucro, reputacao, concorrencia, id], (err, result) => {
+      if (err) {
+        console.error('Erro na atualização:', err);
+        res.status(500).send('Erro na atualização.');
+        return;
+      }
+      console.log('Atualização bem-sucedida:', result.affectedRows, 'linhas afetadas.');
+      res.send('Atualização bem-sucedida.');
+    });
   });
-});
+
+  app.get('/Dados', (req, res) => {
+    // Consulta os dados no banco de dados (supondo que sua tabela seja chamada 'Status')
+    db.query('select * from Status where id=1', (err, results) => {
+      if (err) {
+        console.error('Erro na consulta ao banco de dados:', err);
+        return res.status(500).send('Erro na consulta ao banco de dados.');
+      }
+    
+      results.forEach((result) => {
+        dados = {
+          id: result.Id,
+          lucro: result.Lucro,
+          reputacao: result.Reputação,
+          concorrencia: result.Concorrencia,
+        };
+      });
+
+      
+     res.json(dados)
+    });
+  });
 
 
 app.get('/Fim', (req, res) => {

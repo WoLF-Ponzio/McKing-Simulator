@@ -18,14 +18,15 @@
 <body>
     <div class="container mt-5">
         <div id="pergunta-container">
-            <h1>Pergunta 1</h1>
-            <p class="mb-3">Onde será o local da hamburgueria?</p>
+            
+            <h3>Variedade do Menu</h3>
+            <p class="mb-3">Qual tipo de menu que você deseja oferecer?            </p>
             <div class="btn-group-vertical" role="group" aria-label="Opções">
-                <button type="button" class="btn btn-success mb-2" style="width: 500%; height: 55px;" data-opcao="opcao1">Centro</button>
+                <button type="button" class="btn btn-success mb-2 " style="width: 900px;height:55px;"data-opcao="opcao1" >Menu Economico </button>
                 <br>
-                <button type="button" class="btn btn-success mb-2" style="width: 500%; height: 55px;" data-opcao="opcao2">Mais afastado</button>
+                <button type="button" class="btn btn-success mb-2 " style="width: 900px;height:55px;" data-opcao="opcao2" >Menu de Preços Médios </button>
                 <br>
-                <button type="button" class="btn btn-success mb-2" style="width: 500%; height: 55px;" data-opcao="opcao3">Área de crescimento</button>
+                <button type="button" class="btn btn-success mb-2 " style="width: 900px;height:55px;"  data-opcao="opcao3" >Menu Premium </button>
             </div>
         </div>
     </div>
@@ -33,70 +34,78 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-
-        let id = 1;
+let id = 1;
         let lucro = 0;
         let reputacao = 0;
         let concorrencia = 0;
 
+
+        $(document).ready(function() {
+            // Fazer a solicitação GET para a rota que retorna os dados
+            $.get('/Dados', function(data) {
+                // Atualizar a página com os dados recebidos
+                lucro = data.lucro;
+                reputacao = data.reputacao;
+                concorrencia = data.concorrencia;
+            });
+        });
         
-    
-    // Envie os dados da opção escolhida para o servidor via AJAX
-    function enviarOpcao(opcao) {
-    // Envie os dados da opção escolhida para o servidor via AJAX
-    $.ajax({
-        type: "POST",
-        url: "/atualizar_status", // Rota para o servidor Node.js que lida com a atualização
-        data: {
-            id: id,
-            lucro: lucro,
-            reputacao: reputacao,
-            concorrencia: concorrencia,
-            opcao: opcao // Envie a opção escolhida para o servidor
-        },
-        success: function (response) {
-            // Redirecione para a próxima pergunta ou página após a atualização
-            alert(response);
-            proximaPergunta();
-        },
-        error: function () {
-            alert("Erro ao enviar a opção.");
-        }
-    });
+        // Envie os dados da opção escolhida para o servidor via AJAX
+        function enviarOpcao(opcao) {
+        // Envie os dados da opção escolhida para o servidor via AJAX
+        $.ajax({
+            type: "POST",
+            url: "/atualizar_status", // Rota para o servidor Node.js que lida com a atualização
+            data: {
+                id: id,
+                lucro: lucro,
+                reputacao: reputacao,
+                concorrencia: concorrencia,
+                opcao: opcao // Envie a opção escolhida para o servidor
+            },
+            success: function (response) {
+                // Redirecione para a próxima pergunta ou página após a atualização
+                alert(response);
+                proximaPergunta();
+            },
+            error: function () {
+                alert("Erro ao enviar a opção.");
+            }
+        });
     }
 
     // Adicione um manipulador de eventos de clique para os botões
     document.querySelector(".btn-group-vertical").addEventListener("click", function (event) {
+    
         if (event.target && event.target.dataset.opcao) {
             const opcaoEscolhida = event.target.dataset.opcao;
             switch (opcaoEscolhida) {
                 case "opcao1":
-                    lucro += 10;
-                    reputacao += 5;
-                    concorrencia -= 2;
+                    lucro += 1;
+                    reputacao += 0;
+                    concorrencia -= 1;
                     break;
                 case "opcao2":
-                    lucro += 5;
-                    reputacao -= 2;
-                    concorrencia += 10;
+                    lucro -= 1;
+                    reputacao -= 0;
+                    concorrencia -= 1;
                     break;
                 case "opcao3":
-                    lucro -= 5;
-                    reputacao += 10;
-                    concorrencia += 5;
+                    lucro -= 0;
+                    reputacao += 1;
+                    concorrencia -= 0;
                     break;
                 default:
                     break;
-                }
+            }
             // Envie a opção escolhida para atualização no banco de dados
             enviarOpcao(opcaoEscolhida);
-     }
+        }
     });
 
     function proximaPergunta() {
         window.location.href = 'Pergunta_3';
     }
-
 </script>
 </body>
 </html>
